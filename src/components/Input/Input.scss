@@ -1,0 +1,129 @@
+.input-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+
+    width: 100%;
+
+    &__label {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+
+        color: var(--color-foreground);
+
+        font-size: var(--font-size-sm);
+        font-weight: 600;
+        line-height: 1.4;
+    }
+
+    &__required {
+        color: var(--color-destructive);
+    }
+
+    &__description {
+        margin-top: -2px;
+
+        color: var(--color-muted);
+
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-body);
+    }
+
+    &__control {
+        display: flex;
+        align-items: center;
+
+        width: 100%;
+
+        background: var(--color-background);
+        border: 1px solid var(--color-border);
+        border-radius: 8px;
+
+        transition:
+            border-color 150ms ease,
+            box-shadow 150ms ease,
+            background-color 150ms ease;
+
+        &:focus-within {
+            border-color: var(--color-primary);
+
+            box-shadow: 0 0 0 3px var(--color-brand-100);
+        }
+
+        &:hover:not(.input-field__control--disabled) {
+            border-color: var(--color-neutral-500);
+        }
+
+        &--error {
+            border-color: var(--color-destructive);
+
+            &:focus-within {
+                border-color: var(--color-destructive);
+
+                box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.12);
+            }
+        }
+
+        &--disabled {
+            background: var(--color-neutral-100);
+            cursor: not-allowed;
+        }
+
+        &--sm {
+            min-height: 32px;
+        }
+
+        &--md {
+            min-height: 40px;
+        }
+
+        &--lg {
+            min-height: 48px;
+        }
+
+        input {
+            width: 100%;
+            min-width: 0;
+
+            padding-inline: var(--space-3);
+
+            border: 0;
+            outline: 0;
+
+            background: transparent;
+
+            color: var(--color-foreground);
+
+            font: inherit;
+            font-size: var(--font-size-sm);
+
+            &::placeholder {
+                color: var(--color-muted);
+            }
+
+            &:disabled {
+                cursor: not-allowed;
+            }
+        }
+    }
+
+    &__icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        flex-shrink: 0;
+
+        color: var(--color-muted);
+
+        padding-inline: var(--space-3);
+    }
+
+    &__error {
+        color: var(--color-destructive);
+
+        font-size: var(--font-size-sm);
+        line-height: 1.4;
+    }
+}
