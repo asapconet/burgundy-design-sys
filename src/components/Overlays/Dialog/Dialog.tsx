@@ -3,6 +3,7 @@ import {
   useContext,
   useEffect,
   useId,
+  useRef,
   useState,
   type ButtonHTMLAttributes,
   type HTMLAttributes,
@@ -106,22 +107,86 @@ export function DialogContent({
   ...props
 }: DialogContentProps) {
   const { open, setOpen, titleId, descriptionId } = useDialogContext();
+  const contentRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!open) {
       return;
     }
 
+    triggerRef.current = document.activeElement as HTMLElement;
+
+    const content = contentRef.current;
+
+    if (!content) {
+      return;
+    }
+
+    const focusableSelector = [
+      "button:not([disabled])",
+      "a[href]",
+      "input:not([disabled])",
+      "select:not([disabled])",
+      "textarea:not([disabled])",
+      '[tabindex]:not([tabindex="-1"])',
+    ].join(",");
+
+    const getFocusableElements = () =>
+      Array.from(content.querySelectorAll<HTMLElement>(focusableSelector));
+
+    const focusFirstElement = () => {
+      const focusableElements = getFocusableElements();
+
+      if (focusableElements.length > 0) {
+        focusableElements[0].focus();
+      } else {
+        content.focus();
+      }
+    };
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") {
+        return;
+      }
+
+      const focusableElements = getFocusableElements();
+
+      if (focusableElements.length === 0) {
+        event.preventDefault();
+        content.focus();
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+        return;
+      }
+
+      if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
       }
     };
 
     document.addEventListener("keydown", handleKeyDown);
 
+    focusFirstElement();
+
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+
+      triggerRef.current?.focus();
+      triggerRef.current = null;
     };
   }, [open, setOpen]);
 
@@ -145,11 +210,13 @@ export function DialogContent({
       />
 
       <div
+        ref={contentRef}
         {...props}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
         aria-describedby={descriptionId}
+        tabIndex={-1}
         className={cn(
           "relative z-10 w-full max-w-lg",
           "rounded-ds-lg border border-ds-border",

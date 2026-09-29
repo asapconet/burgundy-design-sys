@@ -134,6 +134,23 @@ while the system expects tokenized utilities and component variants.
 
 The repository also includes an **Adherence Lab** in Storybook containing intentional compliant and non-compliant implementations.
 
+### AI reproduction benchmark
+
+Burgundy also evaluates AI-generated implementations against explicit design-system contracts:
+
+- token compliance
+- component composition
+- interaction semantics
+- accessibility contract
+
+The benchmark includes both a deliberately non-compliant AI reproduction and a corrected implementation.
+
+The expected result is:
+
+````text
+AI-generated reproduction   → 0/4 contracts preserved
+Corrected reproduction      → 4/4 contracts preserved
+
 ## AI-ready design rules
 
 Burgundy includes explicit guidance for AI-assisted UI generation.
@@ -175,7 +192,7 @@ Install dependencies:
 
 ```bash
 bun install
-```
+````
 
 Build design tokens:
 

@@ -76,6 +76,18 @@ Storybook provides an interactive representation of components, foundations, pat
 
 The AI rules document provides explicit constraints for AI-assisted UI generation.
 
+### AI Design-System Rules
+
+[AI Design-System Rules](./ai/design-system-rules.md)
+
+Defines the rules AI-assisted implementations should follow when generating or modifying Burgundy UI.
+
+### AI Reproduction Benchmark
+
+[AI Reproduction Benchmark](./ai/reproduction-benchmark.md)
+
+Documents how Burgundy evaluates AI-generated UI against token, component, interaction, and accessibility contracts.
+
 ## Guiding principle
 
 > The goal is to make the correct implementation the easiest implementation.

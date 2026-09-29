@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Alert, Badge, Button, Card } from "../components";
+import { Alert, Badge, Button, Card } from "../../components";
 
 const meta = {
   title: "Governance/AI Reproduction Lab",

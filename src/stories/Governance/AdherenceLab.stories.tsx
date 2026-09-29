@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Button } from "../components/Actions/Button/Button";
-import { Card } from "../components/Layout/Card/Card";
+import { Button } from "../../components/Actions/Button/Button";
+import { Card } from "../../components/Layout/Card/Card";
 
 const meta = {
   title: "Governance/Adherence Lab",
