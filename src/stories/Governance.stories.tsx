@@ -3,6 +3,7 @@ import { Card } from "../components";
 
 const meta = {
   title: "Governance/Overview",
+  // tags: ["autodocs"],
   parameters: {
     layout: "centered",
   },

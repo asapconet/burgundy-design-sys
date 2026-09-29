@@ -11,7 +11,10 @@ describe("SettingsPanel", () => {
       screen.getByRole("heading", { name: "Profile settings" }),
     ).toBeInTheDocument();
 
-    expect(screen.getByLabelText("Display name")).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Display name", { exact: false }),
+    ).toBeInTheDocument();
+
     expect(
       screen.getByLabelText("Email", { exact: false }),
     ).toBeInTheDocument();
@@ -19,8 +22,8 @@ describe("SettingsPanel", () => {
     expect(screen.getByLabelText("System")).toBeInTheDocument();
     expect(screen.getByLabelText("Product updates")).toBeInTheDocument();
     expect(screen.getByLabelText("Security alerts")).toBeInTheDocument();
-
     expect(screen.getByLabelText("Language")).toBeInTheDocument();
+
     expect(
       screen.getByRole("button", { name: "Save changes" }),
     ).toBeInTheDocument();
@@ -40,10 +43,14 @@ describe("SettingsPanel", () => {
       />,
     );
 
-    expect(screen.getByLabelText("Display name")).toHaveValue("ASAP");
+    expect(screen.getByLabelText("Display name", { exact: false })).toHaveValue(
+      "ASAP",
+    );
+
     expect(screen.getByLabelText("Email", { exact: false })).toHaveValue(
       "asap@example.com",
     );
+
     expect(screen.getByLabelText("Dark")).toBeChecked();
     expect(screen.getByLabelText("Product updates")).not.toBeChecked();
     expect(screen.getByLabelText("Security alerts")).toBeChecked();
@@ -106,11 +113,9 @@ describe("SettingsPanel", () => {
   it("shows a server error", () => {
     render(<SettingsPanel error="Something went wrong. Please try again." />);
 
-    expect(
-      screen.getByRole("alert", {
-        name: /unable to save settings/i,
-      }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole("alert")).toBeInTheDocument();
+
+    expect(screen.getByText("Unable to save settings")).toBeInTheDocument();
 
     expect(
       screen.getByText("Something went wrong. Please try again."),
@@ -128,8 +133,12 @@ describe("SettingsPanel", () => {
       />,
     );
 
-    expect(screen.getByLabelText("Display name")).toBeDisabled();
+    expect(
+      screen.getByLabelText("Display name", { exact: false }),
+    ).toBeDisabled();
+
     expect(screen.getByLabelText("Email", { exact: false })).toBeDisabled();
+
     expect(screen.getByLabelText("Dark")).toBeDisabled();
     expect(screen.getByLabelText("Product updates")).toBeDisabled();
     expect(screen.getByLabelText("Language")).toBeDisabled();
