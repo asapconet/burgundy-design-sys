@@ -86,6 +86,7 @@ export function Select({
             className,
           )}
           aria-invalid={error ? true : undefined}
+          aria-errormessage={error ? errorId : undefined}
           aria-describedby={describedBy}
           disabled={disabled}
           required={required}

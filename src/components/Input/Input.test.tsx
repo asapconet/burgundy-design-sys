@@ -59,4 +59,17 @@ describe("Input", () => {
 
     expect(screen.getByLabelText("Email")).toBeDisabled();
   });
+
+  it("connects the error message to the input", () => {
+    render(<Input label="Email" error="Enter a valid email address" />);
+
+    const input = screen.getByRole("textbox", {
+      name: "Email",
+    });
+
+    const error = screen.getByRole("alert");
+
+    expect(input).toHaveAttribute("aria-invalid", "true");
+    expect(input).toHaveAttribute("aria-errormessage", error.id);
+  });
 });

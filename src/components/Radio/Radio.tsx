@@ -40,6 +40,7 @@ export function Radio({
           disabled={disabled}
           required={required}
           aria-invalid={error ? true : undefined}
+          aria-errormessage={error ? errorId : undefined}
           aria-describedby={describedBy}
           className={cn(
             "mt-0.5 size-4 shrink-0 appearance-none rounded-full",

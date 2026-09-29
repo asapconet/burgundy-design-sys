@@ -87,6 +87,7 @@ export function Input({
             .filter(Boolean)
             .join(" ")}
           aria-invalid={error ? true : undefined}
+          aria-errormessage={error ? errorId : undefined}
           aria-describedby={describedBy}
           disabled={disabled}
           required={required}

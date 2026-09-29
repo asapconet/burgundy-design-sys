@@ -41,6 +41,7 @@ export function Checkbox({
             disabled={disabled}
             required={required}
             aria-invalid={error ? true : undefined}
+            aria-errormessage={error ? errorId : undefined}
             aria-describedby={describedBy}
             className={cn(
               "peer size-4 appearance-none rounded-ds-sm",
