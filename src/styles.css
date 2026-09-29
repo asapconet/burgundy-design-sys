@@ -23,4 +23,17 @@
   --radius-ds-full: var(--radius-full);
 
   --border-width-ds-radio-checked: var(--control-radio-checked-border);
+
+  --spacing-ds-1: var(--space-1);
+  --spacing-ds-2: var(--space-2);
+  --spacing-ds-3: var(--space-3);
+  --spacing-ds-4: var(--space-4);
+  --spacing-ds-5: var(--space-5);
+  --spacing-ds-6: var(--space-6);
+  --spacing-ds-8: var(--space-8);
+  --spacing-ds-10: var(--space-10);
+  --spacing-ds-12: var(--space-12);
+  --spacing-ds-16: var(--space-16);
+  --spacing-ds-20: var(--space-20);
+  --spacing-ds-24: var(--space-24);
 }
