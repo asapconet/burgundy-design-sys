@@ -47,3 +47,23 @@ export const Default: Story = {
     </Dialog>
   ),
 };
+
+export const Information: Story = {
+  render: () => (
+    <Dialog>
+      <DialogTrigger>View information</DialogTrigger>
+
+      <DialogContent>
+        <DialogTitle>Account information</DialogTitle>
+
+        <DialogDescription>
+          Your account is currently active and synchronized across your devices.
+        </DialogDescription>
+
+        <div className="mt-6 flex justify-end">
+          <DialogClose>Done</DialogClose>
+        </div>
+      </DialogContent>
+    </Dialog>
+  ),
+};
