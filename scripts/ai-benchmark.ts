@@ -1,6 +1,47 @@
 import { readFile } from "node:fs/promises";
 import { checkAdherence } from "./adherence";
 
+export interface BenchmarkCheck {
+  name: string;
+  passed: boolean;
+}
+
+export interface BenchmarkResult {
+  checks: BenchmarkCheck[];
+  passed: number;
+  total: number;
+}
+
+export function evaluateReproduction(
+  source: string,
+  adherenceViolationCount: number,
+): BenchmarkResult {
+  const checks: BenchmarkCheck[] = [
+    {
+      name: "Token compliance",
+      passed: adherenceViolationCount === 0,
+    },
+    {
+      name: "Component composition",
+      passed: source.includes("<Button"),
+    },
+    {
+      name: "Interaction semantics",
+      passed: !/<div[\s\S]*onClick=/.test(source),
+    },
+    {
+      name: "Accessibility contract",
+      passed: !/<div[\s\S]*onClick=/.test(source) && source.includes("<Button"),
+    },
+  ];
+
+  return {
+    checks,
+    passed: checks.filter((check) => check.passed).length,
+    total: checks.length,
+  };
+}
+
 const fixtures = [
   {
     name: "AI-generated reproduction",
@@ -21,52 +62,29 @@ for (const fixture of fixtures) {
 
   const adherenceViolations = await checkAdherence(directory);
 
-  const tokenCompliance =
-    adherenceViolations.filter((violation) =>
-      violation.file.endsWith(fixture.path.split("/").pop() ?? ""),
-    ).length === 0;
+  const fileName = fixture.path.split("/").pop() ?? "";
 
-  const componentComposition = source.includes("<Button");
+  const fileViolations = adherenceViolations.filter((violation) =>
+    violation.file.endsWith(fileName),
+  );
 
-  const interactionSemantics = !/<div[\s\S]*onClick=/.test(source);
-
-  const accessibilityContract = interactionSemantics && componentComposition;
-
-  const checks = [
-    {
-      name: "Token compliance",
-      passed: tokenCompliance,
-    },
-    {
-      name: "Component composition",
-      passed: componentComposition,
-    },
-    {
-      name: "Interaction semantics",
-      passed: interactionSemantics,
-    },
-    {
-      name: "Accessibility contract",
-      passed: accessibilityContract,
-    },
-  ];
-
-  const passed = checks.filter((check) => check.passed).length;
-  const total = checks.length;
+  const result = evaluateReproduction(source, fileViolations.length);
 
   console.log(`\n${fixture.name}\n`);
 
-  for (const check of checks) {
+  for (const check of result.checks) {
     console.log(`${check.passed ? "✓" : "✕"} ${check.name}`);
   }
 
-  console.log(`\nResult: ${passed}/${total} contracts preserved.`);
+  console.log(
+    `\nResult: ${result.passed}/${result.total} contracts preserved.`,
+  );
 
-  if (fixture.expectedToPass && passed !== total) {
+  if (fixture.expectedToPass && result.passed !== result.total) {
     process.exitCode = 1;
   }
 
-  if (!fixture.expectedToPass && passed === total) {
+  if (!fixture.expectedToPass && result.passed === result.total) {
     process.exitCode = 1;
   }
 }
