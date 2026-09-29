@@ -4,6 +4,8 @@ import { Checkbox } from "./Checkbox";
 const meta = {
   title: "Components/Checkbox",
   component: Checkbox,
+  parameters: { layout: "centered" },
+  tags: ["autodocs"],
   args: {
     label: "Accept terms and conditions",
   },
