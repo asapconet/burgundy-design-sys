@@ -1,0 +1,69 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --color-brand-50: #fbf3f4;
+  --color-brand-100: #f4e1e4;
+  --color-brand-300: #d99aa3;
+  --color-brand-500: #800020;
+  --color-brand-600: #70001c;
+  --color-brand-700: #5c0017;
+  --color-brand-900: #36000d;
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #fafaf9;
+  --color-neutral-100: #f4f4f2;
+  --color-neutral-300: #d6d6d2;
+  --color-neutral-500: #73736f;
+  --color-neutral-700: #3f3f3b;
+  --color-neutral-900: #1c1c1a;
+  --color-red-600: #b42318;
+  --color-green-600: #16803c;
+  --color-orange-600: #b54708;
+  --color-blue-600: #175cd3;
+  --color-background: #ffffff;
+  --color-foreground: #1c1c1a;
+  --color-border: #d6d6d2;
+  --color-muted: #73736f;
+  --color-primary: #800020;
+  --color-primary-hover: #70001c;
+  --color-primary-active: #5c0017;
+  --color-primary-foreground: #ffffff;
+  --color-destructive: #b42318;
+  --color-success: #16803c;
+  --color-warning: #b54708;
+  --color-info: #175cd3;
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --font-family-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-family-body: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-family-heading: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 28px;
+  --font-size-3xl: 36px;
+  --font-size-4xl: 48px;
+  --font-size-5xl: 72px;
+  --font-line-height-tight: 1.1;
+  --font-line-height-heading: 1.2;
+  --font-line-height-body: 1.5;
+}

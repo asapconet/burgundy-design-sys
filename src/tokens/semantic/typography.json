@@ -1,0 +1,12 @@
+{
+  "font": {
+    "family": {
+      "body": {
+        "$value": "{font.family.sans}"
+      },
+      "heading": {
+        "$value": "{font.family.sans}"
+      }
+    }
+  }
+}
