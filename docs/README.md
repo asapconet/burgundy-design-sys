@@ -1,22 +1,32 @@
-# Burgundy
+# Burgundy Documentation
 
-> A token-driven React design system built for consistent, accessible, and AI-readable UI.
+Burgundy documentation covers the system's architecture, usage conventions, tokens, accessibility requirements, and AI-assisted UI rules.
 
-## Why Burgundy?
+## Documentation
 
-Burgundy explores how a modern design system can remain consistent when UI is produced by both humans and AI-assisted workflows.
+### Getting Started
 
-The system combines:
+[Getting Started](./getting-started.md)
 
-- design tokens
-- Style Dictionary
-- Tailwind CSS
-- CVA
-- React + TypeScript
-- Storybook
-- automated component tests
-- design-system adherence checks
-- AI-readable generation rules
+Introduces the system architecture, development workflow, component conventions, and definition of done.
+
+### Tokens
+
+[Tokens](./tokens.md)
+
+Documents the primitive and semantic token architecture, spacing, typography, color, radius, and token-change workflow.
+
+### Accessibility
+
+[Accessibility](./accessibility.md)
+
+Defines the accessibility expectations that form part of Burgundy's component contracts.
+
+### AI Design-System Rules
+
+[AI Design-System Rules](./ai/design-system-rules.md)
+
+Defines the rules AI-assisted implementations should follow when generating or modifying Burgundy UI.
 
 ## Architecture
 
@@ -31,55 +41,50 @@ CSS Variables
       ↓
 Tailwind Theme
       ↓
-React + CVA
+React Components
       ↓
-Storybook
+Patterns
       ↓
-Product Patterns
+Product UI
 ```
-
-## Components
-
-Button, Input, Select, Checkbox, Radio, Badge, Avatar, Card, Alert, Tabs, Tooltip, Dialog
-
-## Patterns
-
-LoginForm, SearchInterface, SettingsPanel
 
 ## Governance
 
-Burgundy includes an adherence checker that detects common design-system violations such as:
+Burgundy uses several mechanisms to keep implementations consistent:
 
-- raw colors
-- raw pixel values
-- arbitrary Tailwind values
+### Design tokens
 
-Intentional violations are maintained in the Adherence Lab to demonstrate how the system identifies non-compliant implementations.
+Visual decisions are centralized rather than duplicated throughout components.
 
-## AI-ready design rules
+### Component contracts
 
-The repository includes machine-readable guidance for AI-assisted UI generation. The rules define:
+Components define explicit behavior through their props, variants, states, accessibility requirements, and tests.
 
-- token usage
-- semantic styling
-- component composition
-- accessibility expectations
-- component contracts
-- adherence requirements
+### Automated testing
 
-See [`docs/ai/design-system-rules.md`](./docs/ai/design-system-rules.md).
+Vitest and Testing Library validate component behavior.
 
-## Development
+### Adherence validation
 
-```bash
-bun install
-bun run tokens
-bun run test
-bun run adherence
-bun run build
-bun run storybook
-```
+The adherence checker detects common violations such as raw colors, raw pixel values, and arbitrary Tailwind values.
 
-## Status
+### Storybook
 
-Burgundy is a self-directed design-system engineering project focused on demonstrating token architecture, component implementation, accessibility, testing, documentation, and AI-assisted UI governance.
+Storybook provides an interactive representation of components, foundations, patterns, and governance examples.
+
+### AI-readable rules
+
+The AI rules document provides explicit constraints for AI-assisted UI generation.
+
+## Guiding principle
+
+> The goal is to make the correct implementation the easiest implementation.
+
+A developer or AI system should be able to understand:
+
+1. What visual decisions already exist.
+2. Which component should be reused.
+3. Which variants are supported.
+4. Which tokens should be consumed.
+5. Which accessibility behaviors are required.
+6. How to validate the resulting implementation.

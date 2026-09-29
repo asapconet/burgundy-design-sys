@@ -1,73 +1,236 @@
-# React + TypeScript + Vite
+# Burgundy
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> A token-driven React design system built for consistent, accessible, and AI-readable UI.
 
-Currently, two official plugins are available:
+Burgundy is a self-directed design-system engineering project exploring how a modern component system can remain consistent across human and AI-assisted UI development.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The system focuses on four areas:
 
-## React Compiler
+- Token-driven visual foundations
+- Reusable React component contracts
+- Automated adherence and accessibility checks
+- AI-readable design-system rules
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Architecture
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+Primitive Tokens
+      ↓
+Semantic Tokens
+      ↓
+Style Dictionary
+      ↓
+CSS Variables
+      ↓
+Tailwind Theme
+      ↓
+React + CVA
+      ↓
+Storybook
+      ↓
+Product Patterns
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- React
+- TypeScript
+- Tailwind CSS
+- Style Dictionary
+- Class Variance Authority
+- Storybook
+- Vitest
+- Testing Library
+- Bun
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Components
+
+Burgundy currently includes:
+
+- Button
+- Input
+- Select
+- Checkbox
+- Radio
+- Badge
+- Avatar
+- Card
+- Alert
+- Tabs
+- Tooltip
+- Dialog
+
+Components are designed around explicit contracts for:
+
+- variants
+- sizes
+- states
+- accessibility
+- loading behavior
+- validation behavior
+- keyboard interaction
+
+## Patterns
+
+The component primitives are composed into realistic product interfaces:
+
+- LoginForm
+- SearchInterface
+- SettingsPanel
+
+Patterns are intentionally built from existing Burgundy primitives rather than duplicating component behavior.
+
+## Design Tokens
+
+Burgundy separates primitive design decisions from semantic UI roles.
+
+```text
+Primitive Tokens
+      ↓
+Semantic Tokens
+      ↓
+CSS Variables
+      ↓
+Tailwind Utilities
+      ↓
+Components
 ```
+
+Examples of semantic tokens include:
+
+```text
+ds-primary
+ds-primary-hover
+ds-primary-active
+ds-background
+ds-foreground
+ds-border
+ds-muted
+ds-success
+ds-warning
+ds-info
+ds-destructive
+```
+
+This allows the underlying visual values to change without requiring every component to be rewritten.
+
+## Governance
+
+Burgundy treats design-system adherence as an engineering concern.
+
+The repository includes automated checks for common violations such as:
+
+- raw colors
+- raw pixel values
+- arbitrary Tailwind values
+
+For example, this is intentionally considered non-compliant:
+
+```tsx
+className = "bg-[#800020] p-[13px] rounded-[7px]";
+```
+
+while the system expects tokenized utilities and component variants.
+
+The repository also includes an **Adherence Lab** in Storybook containing intentional compliant and non-compliant implementations.
+
+## AI-ready design rules
+
+Burgundy includes explicit guidance for AI-assisted UI generation.
+
+The rules cover:
+
+- token usage
+- semantic styling
+- component composition
+- accessibility
+- component contracts
+- avoiding arbitrary values
+- preserving the token pipeline
+- validating generated UI
+
+See:
+
+`docs/ai/design-system-rules.md`
+
+## Accessibility
+
+Accessibility is treated as part of the component contract rather than an additional layer added after implementation.
+
+Components include behavior for:
+
+- accessible labels
+- focus states
+- keyboard interaction
+- validation states
+- disabled states
+- loading states
+- ARIA relationships
+- dialog semantics
+- tooltip semantics
+
+## Development
+
+Install dependencies:
+
+```bash
+bun install
+```
+
+Build design tokens:
+
+```bash
+bun run tokens
+```
+
+Run tests:
+
+```bash
+bun run test
+```
+
+Run the adherence checker:
+
+```bash
+bun run adherence
+```
+
+Build the application:
+
+```bash
+bun run build
+```
+
+Start Storybook:
+
+```bash
+bun run storybook
+```
+
+## Definition of Done
+
+A UI implementation is considered complete when:
+
+- visual decisions use Burgundy tokens
+- existing components are reused where appropriate
+- component contracts are explicit
+- accessibility behavior is preserved
+- important states are represented
+- tests pass
+- adherence checks pass
+- Storybook documentation exists
+
+## Project Status
+
+Burgundy is a self-directed design-system engineering project focused on demonstrating:
+
+- token architecture
+- component implementation
+- reusable patterns
+- accessibility
+- automated testing
+- design-system governance
+- Storybook documentation
+- AI-assisted UI consistency
+
+The project is intentionally focused on demonstrating the engineering practices behind a design system rather than maximizing the number of components.
