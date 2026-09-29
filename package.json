@@ -12,7 +12,8 @@
     "build-storybook": "storybook build",
     "test": "vitest run",
     "test:watch": "vitest",
-    "tokens": "style-dictionary build --config style-dictionary.config.js"
+    "tokens": "style-dictionary build --config style-dictionary.config.js",
+    "adherence": "bun run scripts/check-adherence.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
@@ -32,6 +33,7 @@
     "@storybook/react-vite": "^10.6.0",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
+    "@types/bun": "^1.4.2",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
