@@ -17,8 +17,7 @@ describe("Avatar", () => {
 
   it("supports sizes", () => {
     render(<Avatar fallback="AA" size="lg" />);
-
-    expect(screen.getByText("AA")).toHaveClass("text-base");
+    expect(screen.getByText("AA").parentElement).toHaveClass("text-base");
   });
 
   it("supports status", () => {

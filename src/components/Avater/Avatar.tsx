@@ -1,9 +1,15 @@
 import type { HTMLAttributes, ReactNode } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import { PersonIcon } from "../../assets/icons";
 import { cn } from "../../lib/cn";
 
 const avatarVariants = cva(
-  "relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-ds-full bg-ds-muted text-ds-foreground",
+  [
+    "relative inline-flex shrink-0 items-center justify-center",
+    "overflow-hidden rounded-ds-full",
+    "border border-ds-border",
+    "bg-ds-muted text-ds-foreground",
+  ],
   {
     variants: {
       size: {
@@ -20,7 +26,10 @@ const avatarVariants = cva(
 );
 
 const statusVariants = cva(
-  "absolute bottom-0 right-0 rounded-ds-full border-2 border-ds-background",
+  [
+    "absolute bottom-0 right-0 z-10",
+    "rounded-ds-full border-2 border-ds-background",
+  ],
   {
     variants: {
       status: {
@@ -64,18 +73,40 @@ export function Avatar({
   className,
   ...props
 }: AvatarProps) {
-  const initials = fallback?.slice(0, 2).toUpperCase();
+  const initials = fallback?.trim().slice(0, 2).toUpperCase();
+
+  const content = src ? (
+    <img
+      src={src}
+      alt={alt}
+      className="absolute inset-0 size-full rounded-ds-full object-cover"
+    />
+  ) : icon ? (
+    <span
+      aria-hidden="true"
+      className="flex size-1/2 items-center justify-center [&>svg]:size-full"
+    >
+      {icon}
+    </span>
+  ) : initials ? (
+    <span aria-hidden="true">{initials}</span>
+  ) : (
+    <span
+      aria-hidden="true"
+      className="flex size-1/2 items-center justify-center [&>svg]:size-full"
+    >
+      <PersonIcon />
+    </span>
+  );
 
   return (
-    <div className={cn(avatarVariants({ size, className }))} {...props}>
-      {src ? (
-        <img src={src} alt={alt} className="size-full object-cover" />
-      ) : icon ? (
-        <span aria-hidden="true">{icon}</span>
-      ) : (
-        <span aria-hidden={!alt}>{initials}</span>
-      )}
-
+    <div
+      role={src ? undefined : "img"}
+      aria-label={src ? undefined : alt || fallback || "User"}
+      className={cn(avatarVariants({ size, className }))}
+      {...props}
+    >
+      {content}
       {status && (
         <span
           className={cn(statusVariants({ status, size }))}

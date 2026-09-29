@@ -60,3 +60,7 @@ export const Offline: Story = {
     status: "offline",
   },
 };
+
+export const PersonFallback: Story = {
+  render: () => <Avatar fallback={undefined} />,
+};
