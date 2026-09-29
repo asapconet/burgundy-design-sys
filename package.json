@@ -13,7 +13,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "tokens": "style-dictionary build --config style-dictionary.config.js",
-    "adherence": "bun run scripts/check-adherence.ts"
+    "adherence": "bun run scripts/check-adherence.ts",
+    "ai:benchmark": "bun run scripts/ai-benchmark.ts"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
