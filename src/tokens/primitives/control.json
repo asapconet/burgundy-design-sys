@@ -1,0 +1,9 @@
+{
+  "control": {
+    "radio": {
+      "checked-border": {
+        "$value": "5px"
+      }
+    }
+  }
+}

@@ -20,4 +20,6 @@
   --radius-ds-md: var(--radius-md);
   --radius-ds-lg: var(--radius-lg);
   --radius-ds-xl: var(--radius-xl);
+
+  --border-width-ds-radio-checked: var(--control-radio-checked-border);
 }

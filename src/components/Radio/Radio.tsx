@@ -45,7 +45,7 @@ export function Radio({
             "mt-0.5 size-4 shrink-0 appearance-none rounded-full",
             "border border-ds-border bg-ds-background",
             "transition-colors",
-            "checked:border-1.4 checked:border-ds-primary",
+            "checked:border-ds-radio-checked checked:border-ds-primary",
             "focus-visible:outline-none focus-visible:ring-2",
             "focus-visible:ring-ds-primary focus-visible:ring-offset-2",
             "disabled:cursor-not-allowed disabled:opacity-50",
