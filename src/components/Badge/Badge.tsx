@@ -1,5 +1,6 @@
 import type { HTMLAttributes, ReactNode } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "../../lib/cn";
 
 const badgeVariants = cva(
   "inline-flex items-center gap-1.5 rounded-ds-full font-medium",
@@ -42,7 +43,10 @@ export function Badge({
   ...props
 }: BadgeProps) {
   return (
-    <span className={badgeVariants({ variant, size, className })} {...props}>
+    <span
+      className={cn(badgeVariants({ variant, size, className }))}
+      {...props}
+    >
       {icon && <span aria-hidden="true">{icon}</span>}
       {children}
     </span>

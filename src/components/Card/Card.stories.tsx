@@ -9,6 +9,7 @@ const meta = {
   parameters: {
     layout: "centered",
   },
+  tags: ["autodocs"],
   argTypes: {
     interactive: {
       control: "boolean",
@@ -77,7 +78,12 @@ export const Interactive: Story = {
     children: (
       <div>
         <strong>View project</strong>
-        <p>Click to open the project details.</p>
+        <button
+          onClick={() => alert("Project details opened!")}
+          className="flex flex-col items-center "
+        >
+          Click to open the project details.
+        </button>
       </div>
     ),
   },

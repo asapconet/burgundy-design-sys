@@ -1,4 +1,5 @@
 import type { HTMLAttributes, ReactNode } from "react";
+import { cn } from "../../lib/cn";
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   header?: ReactNode;
@@ -16,24 +17,14 @@ export function Card({
 }: CardProps) {
   return (
     <div
-      className={[
+      className={cn(
         "w-full overflow-hidden rounded-ds-lg",
         "border border-ds-border",
         "bg-ds-background text-ds-foreground",
-        interactive
-          ? [
-              "cursor-pointer transition-[border-color,box-shadow] duration-150",
-              "hover:border-ds-primary",
-              "hover:shadow-md",
-              "focus-visible:outline-2",
-              "focus-visible:outline-ds-primary",
-              "focus-visible:outline-offset-2",
-            ].join(" ")
-          : "",
-        className ?? "",
-      ]
-        .filter(Boolean)
-        .join(" ")}
+        interactive &&
+          "cursor-pointer transition-[border-color,box-shadow] duration-150 hover:border-ds-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-ds-primary focus-visible:outline-offset-2",
+        className,
+      )}
       {...props}
     >
       {header && (

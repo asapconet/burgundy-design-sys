@@ -1,5 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "../../lib/cn";
 
 const buttonVariants = cva(
   [
@@ -67,7 +68,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      className={buttonVariants({ variant, size, className })}
+      className={cn(buttonVariants({ variant, size, className }))}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
       {...props}

@@ -31,7 +31,10 @@ export function Input({
   const descriptionId = `${inputId}-description`;
   const errorId = `${inputId}-error`;
 
-  const describedBy = error ? errorId : description ? descriptionId : undefined;
+  const describedBy =
+    [description ? descriptionId : null, error ? errorId : null]
+      .filter(Boolean)
+      .join(" ") || undefined;
 
   const sizes = {
     sm: "h-8 px-3 text-sm",
@@ -100,15 +103,17 @@ export function Input({
         )}
       </div>
 
-      {error ? (
-        <p id={errorId} className="text-sm text-ds-destructive">
-          {error}
-        </p>
-      ) : description ? (
+      {description && (
         <p id={descriptionId} className="text-sm text-ds-muted">
           {description}
         </p>
-      ) : null}
+      )}
+
+      {error && (
+        <p id={errorId} className="text-sm text-ds-destructive" role="alert">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
