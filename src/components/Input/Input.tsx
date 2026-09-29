@@ -1,6 +1,4 @@
-import type { InputHTMLAttributes, ReactNode } from "react";
-
-import "./Input.scss";
+import { useId, type InputHTMLAttributes, type ReactNode } from "react";
 
 export interface InputProps extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -19,79 +17,98 @@ export function Input({
   label,
   description,
   error,
-  required,
-  disabled,
   leftIcon,
   rightIcon,
   inputSize = "md",
+  className,
+  required,
+  disabled,
   ...props
 }: InputProps) {
-  const inputId = id ?? crypto.randomUUID();
+  const generatedId = useId();
+  const inputId = id ?? generatedId;
 
-  const descriptionId = description ? `${inputId}-description` : undefined;
+  const descriptionId = `${inputId}-description`;
+  const errorId = `${inputId}-error`;
 
-  const errorId = error ? `${inputId}-error` : undefined;
+  const describedBy = error ? errorId : description ? descriptionId : undefined;
 
-  const describedBy =
-    [descriptionId, errorId].filter(Boolean).join(" ") || undefined;
+  const sizes = {
+    sm: "h-8 px-3 text-sm",
+    md: "h-10 px-3 text-sm",
+    lg: "h-12 px-4 text-base",
+  };
 
   return (
-    <div className="input-field">
+    <div className="flex w-full flex-col gap-1.5">
       {label && (
-        <label className="input-field__label" htmlFor={inputId}>
+        <label
+          htmlFor={inputId}
+          className="text-sm font-medium text-ds-foreground"
+        >
           {label}
-
           {required && (
-            <span className="input-field__required" aria-hidden="true">
+            <span className="ml-1 text-ds-destructive" aria-hidden="true">
               *
             </span>
           )}
         </label>
       )}
 
-      {description && (
-        <span id={descriptionId} className="input-field__description">
-          {description}
-        </span>
-      )}
-
-      <div
-        className={[
-          "input-field__control",
-          `input-field__control--${inputSize}`,
-          error && "input-field__control--error",
-          disabled && "input-field__control--disabled",
-        ]
-          .filter(Boolean)
-          .join(" ")}
-      >
+      <div className="relative">
         {leftIcon && (
-          <span className="input-field__icon" aria-hidden="true">
+          <span
+            className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-ds-muted"
+            aria-hidden="true"
+          >
             {leftIcon}
           </span>
         )}
 
         <input
-          {...props}
           id={inputId}
-          required={required}
-          disabled={disabled}
+          className={[
+            "w-full rounded-ds-md border bg-ds-background",
+            "text-ds-foreground placeholder:text-ds-muted",
+            "outline-none transition-colors",
+            "border-ds-border",
+            "focus:border-ds-primary focus:ring-2 focus:ring-ds-primary/20",
+            "disabled:cursor-not-allowed disabled:opacity-50",
+            "aria-[invalid]:border-ds-destructive",
+            "aria-[invalid]:focus:ring-ds-destructive/20",
+            sizes[inputSize],
+            leftIcon ? "pl-10" : "",
+            rightIcon ? "pr-10" : "",
+            className ?? "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
           aria-invalid={error ? true : undefined}
           aria-describedby={describedBy}
+          disabled={disabled}
+          required={required}
+          {...props}
         />
 
         {rightIcon && (
-          <span className="input-field__icon" aria-hidden="true">
+          <span
+            className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-ds-muted"
+            aria-hidden="true"
+          >
             {rightIcon}
           </span>
         )}
       </div>
 
-      {error && (
-        <span id={errorId} className="input-field__error" role="alert">
+      {error ? (
+        <p id={errorId} className="text-sm text-ds-destructive">
           {error}
-        </span>
-      )}
+        </p>
+      ) : description ? (
+        <p id={descriptionId} className="text-sm text-ds-muted">
+          {description}
+        </p>
+      ) : null}
     </div>
   );
 }

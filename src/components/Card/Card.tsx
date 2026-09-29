@@ -1,7 +1,5 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
-import "./Card.scss";
-
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   header?: ReactNode;
   footer?: ReactNode;
@@ -16,17 +14,37 @@ export function Card({
   className,
   ...props
 }: CardProps) {
-  const classes = ["card", interactive && "card--interactive", className]
-    .filter(Boolean)
-    .join(" ");
-
   return (
-    <div className={classes} {...props}>
-      {header && <div className="card__header">{header}</div>}
+    <div
+      className={[
+        "w-full overflow-hidden rounded-ds-lg",
+        "border border-ds-border",
+        "bg-ds-background text-ds-foreground",
+        interactive
+          ? [
+              "cursor-pointer transition-[border-color,box-shadow] duration-150",
+              "hover:border-ds-primary",
+              "hover:shadow-md",
+              "focus-visible:outline-2",
+              "focus-visible:outline-ds-primary",
+              "focus-visible:outline-offset-2",
+            ].join(" ")
+          : "",
+        className ?? "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      {...props}
+    >
+      {header && (
+        <div className="border-b border-ds-border px-6 py-4">{header}</div>
+      )}
 
-      <div className="card__content">{children}</div>
+      <div className="p-6">{children}</div>
 
-      {footer && <div className="card__footer">{footer}</div>}
+      {footer && (
+        <div className="border-t border-ds-border px-6 py-4">{footer}</div>
+      )}
     </div>
   );
 }
