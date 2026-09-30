@@ -2,14 +2,18 @@
 
 > A token-driven React design system built for consistent, accessible, and AI-readable UI.
 
-Burgundy is a self-directed design-system engineering project exploring how a modern component system can remain consistent across human and AI-assisted UI development.
+Burgundy is a self-directed design-system engineering project focused on building and evaluating a production-minded component system for both human and AI-assisted development.
 
-The system focuses on four areas:
+The project explores how design-system decisions can be made explicit, enforced through tooling, and validated as interfaces evolve.
 
-- Token-driven visual foundations
-- Reusable React component contracts
-- Automated adherence and accessibility checks
-- AI-readable design-system rules
+## What Burgundy Demonstrates
+
+Burgundy focuses on four areas:
+
+- **Token-driven foundations** — primitive and semantic tokens with a Style Dictionary pipeline.
+- **Component contracts** — reusable React components with explicit variants, states, and accessibility behavior.
+- **Design-system governance** — automated adherence checks and deliberate critique scenarios.
+- **AI-ready development** — rules and benchmarks for evaluating whether AI-generated UI actually follows the system.
 
 ## Architecture
 
@@ -70,6 +74,8 @@ Components are designed around explicit contracts for:
 - validation behavior
 - keyboard interaction
 
+The goal is not to maximize component count, but to demonstrate consistent component architecture and behavior.
+
 ## Patterns
 
 The component primitives are composed into realistic product interfaces:
@@ -78,7 +84,7 @@ The component primitives are composed into realistic product interfaces:
 - SearchInterface
 - SettingsPanel
 
-Patterns are intentionally built from existing Burgundy primitives rather than duplicating component behavior.
+Patterns intentionally consume existing Burgundy primitives rather than recreating component behavior.
 
 ## Design Tokens
 
@@ -112,11 +118,11 @@ ds-info
 ds-destructive
 ```
 
-This allows the underlying visual values to change without requiring every component to be rewritten.
+This allows underlying visual values to evolve without requiring every component to be rewritten.
 
 ## Governance
 
-Burgundy treats design-system adherence as an engineering concern.
+Burgundy treats design-system adherence as an engineering concern rather than relying solely on visual review.
 
 The repository includes automated checks for common violations such as:
 
@@ -124,38 +130,40 @@ The repository includes automated checks for common violations such as:
 - raw pixel values
 - arbitrary Tailwind values
 
-For example, this is intentionally considered non-compliant:
+For example:
 
 ```tsx
 className = "bg-[#800020] p-[13px] rounded-[7px]";
 ```
 
-while the system expects tokenized utilities and component variants.
+is intentionally considered non-compliant.
 
-The repository also includes an **Adherence Lab** in Storybook containing intentional compliant and non-compliant implementations.
+The expected implementation instead consumes Burgundy tokens and existing component contracts.
 
-### AI reproduction benchmark
+### Adherence Lab
 
-Burgundy also evaluates AI-generated implementations against explicit design-system contracts:
+Storybook includes an **Adherence Lab** containing both compliant and intentionally non-compliant implementations.
 
-- token compliance
-- component composition
-- interaction semantics
-- accessibility contract
+The lab demonstrates how violations can be identified and explained rather than simply detected.
 
-The benchmark includes both a deliberately non-compliant AI reproduction and a corrected implementation.
+### Critique Lab
 
-The expected result is:
+The **Critique Lab** presents common design-system failures such as:
 
-````text
-AI-generated reproduction   → 0/4 contracts preserved
-Corrected reproduction      → 4/4 contracts preserved
+- token drift
+- semantic-token misuse
+- component bypass
+- accessibility regressions
 
-## AI-ready design rules
+Each example explains what is wrong, why it matters, and what the system expects instead.
 
-Burgundy includes explicit guidance for AI-assisted UI generation.
+## AI-Assisted UI
 
-The rules cover:
+Burgundy treats AI-generated UI as another implementation surface that must follow the same design-system contracts as human-written code.
+
+### AI Design-System Rules
+
+The repository defines explicit rules covering:
 
 - token usage
 - semantic styling
@@ -169,6 +177,28 @@ The rules cover:
 See:
 
 `docs/ai/design-system-rules.md`
+
+### AI Reproduction Benchmark
+
+Burgundy also evaluates AI-generated implementations against explicit design-system contracts:
+
+- token compliance
+- component composition
+- interaction semantics
+- accessibility contract
+
+The benchmark contains both a deliberately non-compliant AI reproduction and a corrected implementation.
+
+```text
+AI-generated reproduction   → 0/4 contracts preserved
+Corrected reproduction      → 4/4 contracts preserved
+```
+
+The goal is to make AI adherence measurable rather than relying only on visual similarity.
+
+See:
+
+`docs/ai/reproduction-benchmark.md`
 
 ## Accessibility
 
@@ -186,13 +216,15 @@ Components include behavior for:
 - dialog semantics
 - tooltip semantics
 
+Accessibility behavior is validated through component tests where appropriate.
+
 ## Development
 
 Install dependencies:
 
 ```bash
 bun install
-````
+```
 
 Build design tokens:
 
@@ -210,6 +242,12 @@ Run the adherence checker:
 
 ```bash
 bun run adherence
+```
+
+Run the AI reproduction benchmark:
+
+```bash
+bun run ai:benchmark
 ```
 
 Build the application:
@@ -239,15 +277,15 @@ A UI implementation is considered complete when:
 
 ## Project Status
 
-Burgundy is a self-directed design-system engineering project focused on demonstrating:
+Burgundy is a self-directed design-system engineering project demonstrating:
 
 - token architecture
-- component implementation
-- reusable patterns
+- component architecture
+- reusable product patterns
 - accessibility
 - automated testing
 - design-system governance
 - Storybook documentation
-- AI-assisted UI consistency
+- AI-assisted UI evaluation
 
 The project is intentionally focused on demonstrating the engineering practices behind a design system rather than maximizing the number of components.
